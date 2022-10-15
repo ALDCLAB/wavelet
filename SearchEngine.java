@@ -7,35 +7,40 @@ class Handler implements URLHandler {
     // various requests.
     int num = 0;
     ArrayList<String>search = new ArrayList<String>(); 
+    ArrayList<String>containSearch = new ArrayList<String>();
+    String searchResult = "";
+    int i = 0;
+    String temp = "";
 
     public String handleRequest(URI url) {
         if (url.getPath().equals("/")) {
-            return String.format("Number: %d", num);
-        } else if (url.getPath().equals("/increment")) {
-            num += 1;
-            return String.format("Number incremented!");
+            return String.format("Hello!");
         } else {
             System.out.println("Path: " + url.getPath());
             if (url.getPath().contains("/add")) {
                 String[] parameters = url.getQuery().split("=");
-                if (parameters[0].equals("count")) {
-                    num += Integer.parseInt(parameters[1]);
-                    return String.format("Number increased by %s! It's now %d", parameters[1], num);
-                }
                 if(parameters[0].equals("s")) {
                     search.add(parameters[1]);
                     return String.format(parameters[1]);
                 }
-            else if ()(url.getPath().contains("/search")) {
+            }
+            else if (url.getPath().contains("/search")) {
                 String[] parameters = url.getQuery().split("=");
                 if(parameters[0].equals("s")) {
-                    for (i = 0; i < search.size(); i++) {
-                        if()
-                    }
+                    for (i = 0; i < search.size() - 1; i++) {
+                        temp = search.get(i);
+                        if(temp.contains(parameters[1])) {
+                            containSearch.add(temp);
 
-            }
+                        }
+                    }
+                    searchResult = containSearch.toString();
+                    return String.format(searchResult);
+                }
             return "404 Not Found!";
+            }
         }
+        return "Hello!";
     }
 }
 
